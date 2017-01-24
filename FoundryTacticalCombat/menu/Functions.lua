@@ -500,7 +500,7 @@
         end
 
         -- Rebuild the log dynamically
-        FTC.Log:Initialize()
+        FTC.Log:Reinitialize()
     end
 
 --[[----------------------------------------------------------

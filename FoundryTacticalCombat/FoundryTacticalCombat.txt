@@ -61,10 +61,10 @@ lib/LMW/LibMsgWin-1.0.lua
 
 core/functions.lua
 core/controls.lua
+core/ui/UIInit.lua
+core/ui/UIEventsHandler.lua
 core/ui/UIAssets.lua
 core/ui/UIControls.lua
-core/ui/UIEventsHandler.lua
-core/ui/UIInit.lua
 core/ui/UIMainWindow.lua
 core/events.lua
 
@@ -79,7 +79,9 @@ buffs/controls.lua
 
 damage/functions.lua
 
-log/functions.lua
+log/LogInit.lua
+log/LogEventsHandler.lua
+log/LogFunctions.lua
 
 stats/functions.lua
 stats/controls.lua

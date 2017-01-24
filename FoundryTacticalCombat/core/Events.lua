@@ -86,14 +86,7 @@
      * --------------------------------
      ]]--
     function FTC:OnLoad()
-
-        -- Setup Combat Log
-        if ( FTC.init.Log ) then
-            if ( FTC.Vars.AlternateChat ) then CHAT_SYSTEM:Minimize() end
-            FTC.Log:Print( GetString(FTC_LongInfo) , {1,0.8,0} )
-        end
-
-        -- Show welcome message
+                -- Show welcome message
         FTC.Welcome()
 
         -- Switch to recurring event
@@ -499,9 +492,6 @@
         -- Generate SCT Alert
         if ( FTC.init.SCT ) then FTC.SCT:NewExp( currentExp , maxExp , reason ) end
 
-        -- Log experience gain
-        if ( FTC.init.Log ) then FTC.Log:Exp( currentExp , reason ) end
-
         -- Update the data table
         FTC.Player:GetLevel()
         
@@ -517,7 +507,6 @@
      ]]--
     function FTC.OnAPUpdate( ... )
         if ( FTC.init.SCT ) then FTC.SCT:NewAP( ... ) end
-        if ( FTC.init.Log ) then FTC.Log:AP( ... ) end
     end
 
     --[[ 
