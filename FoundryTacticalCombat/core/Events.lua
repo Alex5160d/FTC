@@ -16,8 +16,6 @@
         EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_PLAYER_ACTIVATED              , FTC.OnLoad )
         EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_ACTION_LAYER_POPPED           , FTC.OnLayerChange )
         EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_ACTION_LAYER_PUSHED           , FTC.OnLayerChange )
-        EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_SCREEN_RESIZED                , FTC.OnScreenResize )
-        EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_SKILL_POINTS_CHANGED          , FTC.OnAbilitiesChanged )
 
         -- Target Events
         EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_RETICLE_TARGET_CHANGED        , FTC.OnTargetChanged )
@@ -109,27 +107,6 @@
             FTC.Frames:SetupTarget()
             FTC.Frames:SetupGroup() 
         end
-    end
-
-    --[[ 
-     * Handles UI Rescaling
-     * --------------------------------
-     * Called by EVENT_SCREEN_RESIZED
-     * Called by EVENT_ACTION_LAYER_PUSHED
-     * --------------------------------
-     ]]--
-    function FTC.OnScreenResize()
-        FTC.UI:TopLevelWindow( "FTC_UI" , GuiRoot , {GuiRoot:GetWidth(),GuiRoot:GetHeight()} , {CENTER,CENTER,0,0} , false )
-    end
-
-    --[[ 
-     * Handles Ability Unlocking
-     * --------------------------------
-     * Called by EVENT_ABILITY_LIST_CHANGED
-     * --------------------------------
-     ]]--
-    function FTC.OnAbilitiesChanged()
-        FTC:GetAbilityIcons()
     end
 
 
