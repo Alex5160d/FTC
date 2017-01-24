@@ -25,7 +25,7 @@ function FTC.UI:Controls()
 		BSTATE_NORMAL, nil, nil, nil, nil, nil, false)
 	welcome.close:SetNormalTexture('/esoui/art/buttons/closebutton_up.dds')
 	welcome.close:SetMouseOverTexture('/esoui/art/buttons/closebutton_mouseover.dds')
-	welcome.close:SetHandler("OnClicked", FTC.Welcome)
+	welcome.close:SetHandler("OnClicked", FTC.UI.Welcome)
 
 	-- Change the styling
 	welcome.buffer = _G["FTC_WelcomeBuffer"]
@@ -55,12 +55,51 @@ function FTC.UI:TopLevelWindow(name, parent, dims, anchor, hidden)
 end
 
 --[[
+ * Display Addon Welcome Message / Notes
+ * --------------------------------
+ * Called by FTC:OnLoad()
+ * --------------------------------
+ ]] --
+function FTC.UI:Welcome()
+
+	-- Show welcome message
+	if (FTC.Vars.welcomed ~= FTC.version) then
+
+		-- Only show welcome message for English clients
+		if (FTC.language == "en") then
+
+			-- Add welcome message content
+			FTC.inWelcome = true
+			FTC.UI:WelcomeMessage()
+
+			local buffer = FTC_Welcome:GetNamedChild("Buffer")
+			local slider = FTC_Welcome:GetNamedChild("Slider")
+
+			-- Set the welcome position
+			buffer:SetScrollPosition(2)
+			slider:SetValue(buffer:GetNumHistoryLines() - 2)
+			slider:SetHidden(false)
+			welcome:SetHidden(false)
+			FTC_UI:SetAlpha(0)
+		end
+
+		-- Register that the user has been welcomed
+		FTC.Vars.welcomed = FTC.version
+
+		-- Do not show
+	else
+		welcome:SetHidden(true)
+		FTC_UI:SetAlpha(100)
+	end
+end
+
+--[[
  * Add Welcome Message
  * --------------------------------
  * Called by FTC.UI:Controls()
  * --------------------------------
  ]] --
-function FTC.UI:Welcome()
+function FTC.UI:WelcomeMessage()
 
 	-- Add welcome messages
 	local welcome = _G["FTC_Welcome"]

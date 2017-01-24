@@ -41,67 +41,7 @@
 		for k,v in pairs(t2) do t1[k]=v end
 		return t1
 	end
- 
-	--[[ 
-	 * Display Addon Welcome Message / Notes
-	 * --------------------------------
-	 * Called by FTC:OnLoad()
-	 * --------------------------------
-	 ]]--  
-	function FTC.Welcome() 
 
-        -- Show welcome message
-        if ( FTC.Vars.welcomed ~= FTC.version ) then
-
-			-- Only show welcome message for English clients
-			if ( FTC.language == "en" ) then
-
-				-- Add welcome message content
-				FTC.inWelcome = true
-				FTC.UI:Welcome()
-
-	            local buffer  = FTC_Welcome:GetNamedChild("Buffer")
-	            local slider  = FTC_Welcome:GetNamedChild("Slider")
-
-	            -- Set the welcome position
-	            buffer:SetScrollPosition(2)
-	            slider:SetValue(buffer:GetNumHistoryLines() - 2)
-	            slider:SetHidden(false)
-	            welcome:SetHidden(false)
-	            FTC_UI:SetAlpha(0)
-	        end
-
-            -- Register that the user has been welcomed
-            FTC.Vars.welcomed = FTC.version
-    
-        -- Do not show
-        else
-        	welcome:SetHidden(true)
-        	FTC_UI:SetAlpha(100)
-        end
-	end
-
-	 --[[ 
-	 * Handle Special Visibility Needs
-	 * --------------------------------
-	 * Called by FTC.OnLayerChange()
-	 * --------------------------------
-	 ]]--  
-	function FTC:ToggleVisibility( activeLayerIndex )
-
-		-- We only need to act if it's in move, or welcome mode
-		if not ( FTC.move or FTC.inWelcome ) then return end
-
-		-- Maybe get action layer
-		activeLayerIndex = activeLayerIndex or GetNumActiveActionLayers()
-
-		-- Maybe disable move mode
-		if ( FTC.move and activeLayerIndex > 3 ) then FTC.Menu:MoveFrames( false ) end
-
-		-- Maybe disable welcome message
-		if ( FTC.inWelcome and activeLayerIndex > 2 ) then FTC.Welcome() end
-	end
-	
 	 --[[ 
 	 * Return Localized Delimited Number
 	 * --------------------------------

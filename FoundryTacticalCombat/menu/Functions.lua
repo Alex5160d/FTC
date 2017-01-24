@@ -154,7 +154,7 @@
 
         -- Toggle visibility
         FTC.UI:SetHidden( not LAMAddonSettingsWindow:IsHidden() )
-        FTC:ToggleVisibility()
+        FTC.UI:ToggleVisibility()
         FTC.inMenu = false
     end
 

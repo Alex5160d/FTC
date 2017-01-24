@@ -154,3 +154,24 @@ function FTC.UI:Button(name, parent, dims, anchor, state, font, align, normal, p
 		mouseover[4]):SetHorizontalAlignment(align[1]):SetVerticalAlignment(align[2]):SetHidden(hidden).__END
 	return button
 end
+
+--[[
+* Handle Special Visibility Needs
+* --------------------------------
+* Called by FTC.OnLayerChange()
+* --------------------------------
+]] --
+function FTC.UI:ToggleVisibility(activeLayerIndex)
+
+	-- We only need to act if it's in move, or welcome mode
+	if not (FTC.move or FTC.inWelcome) then return end
+
+	-- Maybe get action layer
+	activeLayerIndex = activeLayerIndex or GetNumActiveActionLayers()
+
+	-- Maybe disable move mode
+	if (FTC.move and activeLayerIndex > 3) then FTC.Menu:MoveFrames(false) end
+
+	-- Maybe disable welcome message
+	if (FTC.inWelcome and activeLayerIndex > 2) then FTC.UI:Welcome() end
+end

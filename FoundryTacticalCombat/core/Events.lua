@@ -14,8 +14,6 @@
 
         -- User Interface Events
         EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_PLAYER_ACTIVATED              , FTC.OnLoad )
-        EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_ACTION_LAYER_POPPED           , FTC.OnLayerChange )
-        EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_ACTION_LAYER_PUSHED           , FTC.OnLayerChange )
 
         -- Target Events
         EVENT_MANAGER:RegisterForEvent( "FTC" , EVENT_RETICLE_TARGET_CHANGED        , FTC.OnTargetChanged )
@@ -69,26 +67,12 @@
   ]]----------------------------------------------------------
 
     --[[ 
-     * Handles UI Layer Changes
-     * --------------------------------
-     * Called by EVENT_ACTION_LAYER_POPPED
-     * Called by EVENT_ACTION_LAYER_PUSHED
-     * --------------------------------
-     ]]--
-    function FTC.OnLayerChange( eventCode, layerIndex, activeLayerIndex )
-        FTC:ToggleVisibility( activeLayerIndex )
-    end
-
-    --[[ 
      * Handles Interface Startup
      * --------------------------------
      * Called by EVENT_PLAYER_ACTIVATED
      * --------------------------------
      ]]--
     function FTC:OnLoad()
-                -- Show welcome message
-        FTC.Welcome()
-
         -- Switch to recurring event
         EVENT_MANAGER:UnregisterForEvent( "FTC" , EVENT_PLAYER_ACTIVATED )
         EVENT_MANAGER:RegisterForEvent(   "FTC" , EVENT_PLAYER_ACTIVATED , FTC.OnActivated )
